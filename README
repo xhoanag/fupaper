@@ -1,0 +1,14 @@
+Hinweise:
+
+- Text immer in sections/*.tex schreiben
+- Nur section / subsection / subsubsection benutzen
+- Keine Nummerierung selbst hinzufügen
+- Keine Seitenumbrüche einfügen
+- Neue Kapitel starten nicht auf neuer Seite
+- Template nicht ändern (icis.cls nicht anfassen)
+- Literatur in references.bib
+- Zitieren mit \autocite{}
+- Bilder, Diagramme → figures/
+- Tabellen → tables/
+- Keine eigene Schriftgröße / Abstände / Layout ändern, sonst wird das Paper evtl. rejected
+- Projekt muss mit XeLaTeX + Biber kompilieren  
