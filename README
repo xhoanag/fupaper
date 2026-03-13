@@ -12,3 +12,23 @@ Hinweise:
 - Tabellen → tables/
 - Keine eigene Schriftgröße / Abstände / Layout ändern, sonst wird das Paper evtl. rejected
 - Projekt muss mit XeLaTeX + Biber kompilieren  
+
+
+## ICIS Rules
+
+- Abstract max 150 words
+- Completed Research Paper max 16 pages
+- Research-in-progress max 8 pages
+
+Page limit includes:
+- text
+- figures
+- tables
+- appendix
+
+Page limit excludes:
+- title
+- authors
+- abstract
+- keywords
+- references
