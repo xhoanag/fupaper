@@ -1,34 +1,58 @@
-Hinweise:
+## Hinweise
 
-- Text immer in sections/*.tex schreiben
-- Nur section / subsection / subsubsection benutzen
+- Text immer in `sections/*.tex` schreiben
+- Nur `\section`, `\subsection`, `\subsubsection` benutzen
 - Keine Nummerierung selbst hinzufügen
-- Keine Seitenumbrüche einfügen
+- Keine Seitenumbrüche einfügen (`\newpage`, `\clearpage`)
 - Neue Kapitel starten nicht auf neuer Seite
-- Template nicht ändern (icis.cls nicht anfassen)
-- Literatur in references.bib
-- Zitieren mit \autocite{}
-- Bilder, Diagramme → figures/
-- Tabellen → tables/
+- Template nicht ändern (`icis.cls` nicht anfassen)
 - Keine eigene Schriftgröße / Abstände / Layout ändern, sonst wird das Paper evtl. rejected
-- Projekt muss mit XeLaTeX + Biber kompilieren  
+- Literatur in `references.bib`
+- Zitieren mit `\autocite{}`
+- Bilder / Diagramme → `figures/`
+- Tabellen → `tables/`
+- Projekt muss mit XeLaTeX + Biber kompilieren
 
+### ICIS Submission Rules (Review Version)
 
-## ICIS Rules
+- Autoren dürfen NICHT im PDF stehen
+- Abstract darf NICHT im PDF stehen
+- Keywords dürfen NICHT im PDF stehen
+- Acknowledgements dürfen NICHT im PDF stehen
+- Autoren und Abstract werden im Submission-System eingetragen
+- Appendix bleibt im Paper erlaubt
+- References bleiben im Paper
 
-- Abstract max 150 words
-- Completed Research Paper max 16 pages
-- Research-in-progress max 8 pages
+---
 
-Page limit includes:
-- text
-- figures
-- tables
-- appendix
+## ICIS Formatting Rules
 
-Page limit excludes:
-- title
-- authors
-- abstract
-- keywords
-- references
+- Abstract max 150 Wörter (im Submission-System, nicht im PDF)
+- Completed Research Paper max 16 Seiten
+- Research-in-progress max 8 Seiten
+
+Seitenlimit beinhaltet:
+- Text
+- Figuren
+- Tabellen
+- Appendix
+
+Seitenlimit beinhaltet NICHT:
+- Title
+- Authors
+- Abstract
+- Keywords
+- References
+
+---
+
+## Wichtig
+
+Das Template setzt automatisch:
+- Schriftart
+- Abstände
+- Seitenränder
+- Header / Footer
+- Section-Format
+
+Diese Einstellungen dürfen nicht manuell geändert werden.
