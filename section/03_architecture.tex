@@ -1,1 +1,100 @@
 \section{System Architecture}
+
+\begin{figure}[htbp]
+\centering
+
+\tikzset{
+    box/.style={
+        draw,
+        rectangle,
+        fill=white,
+        text width=3.0cm,
+        minimum height=1.15cm,
+        align=center
+    },
+    line/.style={
+        -Latex,
+        thick
+    }
+}
+
+% ===================== VERSION 1 =====================
+\begin{minipage}{\textwidth}
+\centering
+\begin{tikzpicture}[
+    font=\small,
+    >=Latex
+]
+
+\node[box] (c1) at (1.5,0)  {Contextualizer};
+\node[box] (r1) at (5.2,0)  {Semantic\\Retrieval};
+\node[box] (g1) at (8.9,0)  {Generator};
+\node[box] (p1) at (12.6,0) {Postprocessing};
+
+\draw[line] (c1.east) -- (r1.west);
+\draw[line] (r1.east) -- (g1.west);
+\draw[line] (g1.east) -- (p1.west);
+
+\end{tikzpicture}
+
+\vspace{0.4em}
+\textbf{(a) Version 1}
+\end{minipage}
+
+\vspace{1.2em}
+
+% ===================== VERSION 2 =====================
+\begin{minipage}{\textwidth}
+\centering
+\begin{tikzpicture}[
+    font=\small,
+    >=Latex
+]
+
+% Router
+\node[box] (router) at (1.8,0) {Router \&\\Contextualizer};
+
+% Split point
+\coordinate (split) at (4.0,0);
+
+% End boxes (same right edge)
+\node[box] (gen1) at (14.2,1.8) {Generator};
+\node[box] (gen2) at (14.2,0)   {Generator \&\\Postprocessing};
+\node[box] (gen3) at (14.2,-1.8){Generator \&\\Postprocessing};
+
+% Middle workflow
+\node[box] (retrieval) at (6.8,0)  {Hybrid\\Retrieval};
+\node[box] (rerank)    at (10.5,0) {Reranker};
+
+% Lower workflow
+\node[box] (modes) at (7.9,-1.8) {6 different\\modes};
+
+% Trunk
+\draw[thick] (router.east) -- (split);
+
+% Branches from split
+\draw[line] (split) |- (gen1.west);
+\draw[line] (split) -- (retrieval.west);
+\draw[line] (split) |- (modes.west);
+
+% Middle workflow
+\draw[line] (retrieval.east) -- (rerank.west);
+\draw[line] (rerank.east) -- (gen2.west);
+
+% Lower workflow
+\draw[line] (modes.east) -- (gen3.west);
+
+% Labels at branching point
+\node[anchor=west, align=left] at (4.1,2.15) {Path without Retrieval};
+\node[anchor=west]             at (4.1,0.28) {Q\&A};
+\node[anchor=west]             at (4.1,-1.22) {Socratic};
+
+\end{tikzpicture}
+
+\vspace{0.4em}
+\textbf{(b) Version 2}
+\end{minipage}
+
+\caption{Conceptual workflows of the RAG systems evaluated in this work.}
+\label{fig:workflow_vergleich}
+\end{figure}
