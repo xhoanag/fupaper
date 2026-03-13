@@ -6,53 +6,35 @@
 - Keine Seitenumbrüche einfügen (`\newpage`, `\clearpage`)
 - Neue Kapitel starten nicht auf neuer Seite
 - Template nicht ändern (`icis.cls` nicht anfassen)
-- Keine eigene Schriftgröße / Abstände / Layout ändern, sonst wird das Paper evtl. rejected
+- Keine eigene Schriftgröße / Abstände / Layout ändern
 - Literatur in `references.bib`
 - Zitieren mit `\autocite{}`
 - Bilder / Diagramme → `figures/`
 - Tabellen → `tables/`
 - Projekt muss mit XeLaTeX + Biber kompilieren
 
-### ICIS Submission Rules (Review Version)
+## ICIS 2026 Submission Rules
 
 - Autoren dürfen NICHT im PDF stehen
 - Abstract darf NICHT im PDF stehen
 - Keywords dürfen NICHT im PDF stehen
-- Acknowledgements dürfen NICHT im PDF stehen
-- Autoren und Abstract werden im Submission-System eingetragen
-- Appendix bleibt im Paper erlaubt
+- Autoren, Abstract und Keywords werden in PCS eingetragen
+- Acknowledgements in der Review-Version leer lassen
+- Appendix bleibt im Paper
 - References bleiben im Paper
+- Alles muss in einer einzigen PDF-Datei sein
+- Submission vollständig anonymisieren
+- PDF-Metadaten vor Abgabe prüfen und persönliche Infos entfernen
 
----
+## ICIS 2026 Length Rules
 
-## ICIS Formatting Rules
+- Completed Research Paper: max. 16 Seiten
+- Short Paper: max. 8 Seiten
 
-- Abstract max 150 Wörter (im Submission-System, nicht im PDF)
-- Completed Research Paper max 16 Seiten
-- Research-in-progress max 8 Seiten
-
-Seitenlimit beinhaltet:
+Seitenlimit ist all-inclusive und beinhaltet:
+- Title
 - Text
 - Figuren
 - Tabellen
-- Appendix
-
-Seitenlimit beinhaltet NICHT:
-- Title
-- Authors
-- Abstract
-- Keywords
 - References
-
----
-
-## Wichtig
-
-Das Template setzt automatisch:
-- Schriftart
-- Abstände
-- Seitenränder
-- Header / Footer
-- Section-Format
-
-Diese Einstellungen dürfen nicht manuell geändert werden.
+- Appendix
