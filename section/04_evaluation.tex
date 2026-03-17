@@ -5,7 +5,7 @@
 \subsection{Multidimensional Evaluation Framework}
 
 \paragraph{RAGAS: Automatic Evaluation Along the RAG Dimensions}
-
+%references???
 To enable a scalable and systematic assessment of the developed RAG chatbot, the evaluation was conducted using the Retrieval-Augmented Generation Assessment System (RAGAS) \cite{es2025ragas}. RAGAS was selected because it is a widely used framework for the automatic evaluation of RAG pipelines and allows quality to be assessed along the central dimensions of retrieval effectiveness, generation quality, and factual correctness. The framework is particularly suitable for applied settings, where large numbers of heterogeneous queries must be evaluated and manually created reference answers are not available.
 
 Evaluating RAG systems differs from the evaluation of purely generative models, as the final output depends on both the retrieved context and the language model’s generation. Errors may originate from different stages of the pipeline, for example from retrieving irrelevant documents, from insufficient integration of multiple context passages, or from hallucinated statements despite the availability of correct evidence. Consequently, evaluation must consider both retrieval and generation performance, as well as the factual grounding of the produced answers.

@@ -38,3 +38,9 @@ Seitenlimit ist all-inclusive und beinhaltet:
 - Tabellen
 - References
 - Appendix
+
+To build file:
+xelatex main.tex
+biber main
+xelatex main.tex
+xelatex main.tex
