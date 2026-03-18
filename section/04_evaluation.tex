@@ -20,6 +20,26 @@ To ensure stable results despite the stochastic nature of LLM-based evaluation, 
 
 While the automated RAGAS evaluation provides a quantitative view of retrieval effectiveness, answer relevance, and factual grounding, it cannot fully capture pedagogical quality or perceived usefulness, which are particularly relevant in educational applications. For this reason, RAGAS was used as the core component of the automatic evaluation and complemented by additional evaluation methods in the overall study design.
 
+\paragraph{Human evaluation}
+\subparagraph{Expert blind assessment}
+
+To complement automated evaluation, an expert-based blind test was conducted to comparatively assess the two RAG systems. The evaluation followed an A/B design in which experts were presented with two system responses (A/B) per prompt in an identical interface, without knowledge of the underlying system configuration. This setup is inspired by arena-style evaluation approaches commonly used for generative models, which aim to reduce expectation and confirmation bias in human judgments \autocite{khan2025efficienteducationalchatbotsbenchmarking}.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\linewidth]{figures/expert_blindtest_interface.png}
+    \caption{Arena-style interface used in the expert blind test. Two system responses (A/B) are displayed side-by-side in an identical interface to enable unbiased comparison.}
+    \label{fig:expert_blindtest}
+\end{figure}
+
+The study was conducted as moderated one-on-one sessions with a duration of approximately 30 to 60 minutes per participant. In total, 14 experts participated, including authors of e-learning content, educators, and domain experts from applied research and academic institutions. The evaluation followed a standardized procedure: First, participants were introduced to the evaluation setup and rating criteria. Next, representative use cases (cf. Section 4.1) were presented together with curated prompts derived from historical user queries. For each prompt, two system outputs were displayed in randomized order (see Figure~\ref{fig:expert_blindtest}). Participants evaluated both responses independently using a five-point Likert scale (1 = strongly disagree, 5 = strongly agree). In addition, participants were asked to verbalize their reasoning in a think-aloud setting, which was recorded and transcribed for qualitative analysis.
+
+The evaluation combined quantitative and qualitative assessment to enable a comprehensive comparison of system performance. Quantitatively, responses were rated across multiple dimensions, including correctness, completeness, relevance, coherence, clarity, and didactic value. These criteria capture both technical answer quality and pedagogical effectiveness, which are particularly relevant in educational chatbot settings. Qualitatively, the think-aloud transcripts provide insights into expert decision-making processes, perceived strengths and weaknesses, and domain-specific expectations. This mixed-methods approach allows not only for a systematic comparison of both systems but also for a deeper understanding of how differences in system design affect perceived answer quality.
+
+
+\subparagraph{User blind assessment}
+%Zitho
+
 \paragraph{Cost Analysis: Overhead of Architectural Choices}
 Cost efficiency has emerged as a critical dimension in both best-practice guidelines and recent evaluation literature on RAG systems, particularly in the context of real-world deployments. While much prior work focuses on accuracy and retrieval quality, productive systems must additionally satisfy constraints related to computational cost and responsiveness. This is especially relevant for educational platforms, where high interaction volumes and sustained user engagement amplify even small inefficiencies in token consumption or latency.
 
