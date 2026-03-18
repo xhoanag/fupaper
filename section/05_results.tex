@@ -1,5 +1,36 @@
 \section{Key Results}
 
+\paragraph{RAGAS}
+\subparagraph{Descriptive Results}
+
+Figure~\ref{fig:ragas1} shows the aggregated mean values, standard deviations, and 95\% confidence intervals of the evaluated metrics (\textit{Answer Relevancy}, \textit{Context Relevance}, and \textit{Faithfulness}) for both system versions. Points indicate the mean values ($\mu$), the lighter vertical bars represent the standard deviation (SD), and the darker bars indicate the 95\% confidence interval (CI).
+
+For \textit{Answer Relevancy}, V1 achieves a higher mean value ($\mu = 0.805$, $\sigma = 0.138$) than V2 ($\mu = 0.750$, $\sigma = 0.119$), with clearly separated confidence intervals. For \textit{Context Relevance}, the pattern is reversed: V2 reaches a higher mean value ($\mu = 0.812$, $\sigma = 0.336$) than V1 ($\mu = 0.758$, $\sigma = 0.373$), while the variance is higher for both versions compared to \textit{Answer Relevancy}. For \textit{Faithfulness}, the mean values are close to each other (V1: $\mu = 0.880$, $\sigma = 0.203$; V2: $\mu = 0.855$, $\sigma = 0.228$), and the confidence intervals overlap.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{figures/ragas1.jpg}
+\caption{Descriptive overview of RAGAS metrics including mean values, standard deviations, and 95\% confidence intervals}
+\label{fig:ragas1}
+\end{figure}
+
+\subparagraph{Paired Differences and Significance Tests}
+
+Figure~\ref{fig:ragas2} presents the paired mean differences (V2 -- V1). Positive values indicate higher scores for V2, while negative values indicate higher scores for V1. Vertical bars represent the 95\% confidence interval of the difference, and the horizontal line at zero marks the absence of an effect. Asterisks indicate statistically significant differences.
+
+For \textit{Answer Relevancy}, the mean difference is $-0.055$, with the confidence interval entirely below zero. The difference is significant ($t = 4.285$, $p < 0.001$; Wilcoxon test also significant).  
+
+For \textit{Context Relevance}, the mean difference is $+0.053$, with the confidence interval entirely above zero. The difference is significant ($t = 2.088$, $p = 0.021$; Wilcoxon test significant).  
+
+For \textit{Faithfulness}, the mean difference is $-0.025$. The confidence interval crosses zero, and the difference is not significant ($t = 1.031$, $p = 0.153$; Wilcoxon test not significant).
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{figures/ragas2.png}
+\caption{Paired difference plot of the RAGAS metrics (V2 -- V1) with 95\% confidence intervals}
+\label{fig:ragas2}
+\end{figure}
+
 \paragraph{Human evaluation}
 \subparagraph{Expert blind assessment}
 
