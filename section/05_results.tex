@@ -46,3 +46,15 @@ At the same time, the think-aloud comments also revealed important limitations o
 
 Taken together, the expert blind test shows that V2 did not improve all aspects of performance equally, but it did yield meaningful gains in those dimensions most closely related to the paper’s educational objective: relevance, didactic quality, and learning-oriented interaction. The results therefore suggest that the best-practice-inspired redesign particularly strengthens the chatbot’s role as a learning assistant, while trade-offs remain in technical support performance, language consistency, and perceived response speed.
 
+\subsection{Cost analysis}
+
+The results shown in \autoref{fig:cost_analysis} illustrate the key effects of the architectural evolution from V1 to V2 in terms of cost and latency. Overall, there is a significant increase in the average cost per prompt from €0.0133 (V1) to €0.0475 (V2), which represents more than a threefold increase. This cost increase is primarily attributable to higher token consumption, particularly due to additional pipeline components such as reranking and more complex retrieval processes. The increase is not evenly distributed but is driven primarily by additional input tokens in reranking and by the expanded multi-hop processing, while the increase in output tokens is comparatively moderate.
+
+A significant deterioration can also be observed in terms of response times. The average total latency increases from 3.24 seconds in V1 to 6.21 seconds in V2. At the same time, the time-to-first-token (TTFT) increases to 5.77 seconds. However, the figure also shows that a significant portion of this additional latency is attributable to the newly introduced reranking. Streaming does little to alleviate the increased latency, since response generation takes less than a second on average, but it does reduce the TTFT.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{figures/cost_analysis_result.png}
+\caption{Key results of the cost analysis}
+\label{fig:cost_analysis}
+\end{figure}
