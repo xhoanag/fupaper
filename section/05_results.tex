@@ -1,7 +1,6 @@
 \section{Key Results}
-
-\paragraph{RAGAS}
-\subparagraph{Descriptive Results}
+\subsection{RAGAS}
+\paragraph{Descriptive Results}
 
 Figure~\ref{fig:ragas1} shows the aggregated mean values, standard deviations, and 95\% confidence intervals of the evaluated metrics (\textit{Answer Relevancy}, \textit{Context Relevance}, and \textit{Faithfulness}) for both system versions. Points indicate the mean values ($\mu$), the lighter vertical bars represent the standard deviation (SD), and the darker bars indicate the 95\% confidence interval (CI).
 
@@ -14,7 +13,7 @@ For \textit{Answer Relevancy}, V1 achieves a higher mean value ($\mu = 0.805$, $
 \label{fig:ragas1}
 \end{figure}
 
-\subparagraph{Paired Differences and Significance Tests}
+\paragraph{Paired Differences and Significance Tests}
 
 Figure~\ref{fig:ragas2} presents the paired mean differences (V2 -- V1). Positive values indicate higher scores for V2, while negative values indicate higher scores for V1. Vertical bars represent the 95\% confidence interval of the difference, and the horizontal line at zero marks the absence of an effect. Asterisks indicate statistically significant differences.
 
@@ -31,8 +30,7 @@ For \textit{Faithfulness}, the mean difference is $-0.025$. The confidence inter
 \label{fig:ragas2}
 \end{figure}
 
-\paragraph{Human evaluation}
-\subparagraph{Expert blind assessment}
+\subsection{Expert blind assessment}
 
 The expert blind test provides a differentiated assessment of the two system versions (V1 and V2). While the questionnaire-based ratings reveal statistically significant differences across specific use cases and evaluation dimensions, the accompanying think-aloud data offer additional insight into how experts perceived the qualitative differences between both systems. One expert interview was excluded from the analysis because essential course vectors were isolated as technical outliers in the vector database and were therefore not retrievable, which would have distorted comparability with the remaining cases.
 
@@ -44,7 +42,11 @@ The qualitative think-aloud analysis helps explain these quantitative findings. 
 
 At the same time, the think-aloud comments also revealed important limitations of V2. In terms of answer quality, experts characterized V1 as more likely to provide concise ``high-level'' answers, whereas V2 was perceived as integrating course-specific context more deeply. This difference was described primarily as one of abstraction level and contextual depth rather than simple quality superiority. Moreover, V2 received some critical comments regarding language consistency, especially when English prompt structures appeared in otherwise German interactions, which led to perceived inconsistency and uncertainty. This indicates that linguistic coherence is a sensitive quality criterion in educational settings that may not be fully captured by structured rating scales alone. Regarding references, experts considered both systems largely comparable, with no clear advantage for either version. Finally, latency was consistently perceived in favor of V1, which was judged to respond faster.
 
-Taken together, the expert blind test shows that V2 did not improve all aspects of performance equally, but it did yield meaningful gains in those dimensions most closely related to the paper’s educational objective: relevance, didactic quality, and learning-oriented interaction. The results therefore suggest that the best-practice-inspired redesign particularly strengthens the chatbot’s role as a learning assistant, while trade-offs remain in technical support performance, language consistency, and perceived response speed.
+Taken together, the expert blind test shows that V2 did not improve all aspects of performance equally, but it did yield meaningful gains in those dimensions most closely related to the paper’s educational objective: relevance, didactic quality, and learning-oriented interaction. 
+%The results therefore suggest that the best-practice-inspired redesign particularly strengthens the chatbot’s role as a learning assistant, while trade-offs remain in technical support performance, language consistency, and perceived response speed.
+
+\subsection{Expert blind assessment}
+CURRENTLY IN WORK, NOT INCLUDED IN THE PAPER YET
 
 \subsection{Cost analysis}
 

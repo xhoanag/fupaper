@@ -1,7 +1,7 @@
 \section{Evaluation Framework}
 
 \subsection{Data Basis}
-
+\label{data_basis}
 First, the identified gap regarding the lack of use case orientation in the evaluation datasets is addressed. In the educational context it is crucial that the interactions being tested reflect real user needs, as the quality of a system is largely determined by its practical applicability. A data-driven approach for identifying and synthesizing use cases was developed. The use of real interaction data ensures that the derived use cases are not hypothetically constructed but are empirically grounded. This provides an essential foundation for the subsequent evaluation, as the performance of the systems is examined across practice-relevant scenarios, thereby achieving higher external validity.
 
 The starting point was approximately $13,000$ real prompts from logging platform of the productive chatbot, which capture actual user interactions. This raw dataset was first subjected to rule-based pre-filtering, during which irrelevant or technically flawed entries were removed and duplicates were cleaned up. This resulted in a cleaned dataset of $11,778 prompts$, which served as the basis for further analysis.
@@ -9,95 +9,19 @@ In the next step, the remaining prompts were mapped into a semantic vector space
 Since purely data-driven clusters do not necessarily represent directly interpretable usage scenarios, a manual aggregation was performed in the final step. In this process, clusters with related content were merged and abstracted into higher-level use cases. The result of this process is seven central usage categories that systematically map the actual interaction patterns of users.
 From these categories, three representative use cases were selected for the evaluation to ensure both coverage and comparability. These include (1) technical support queries, which reflect administrative and platform-related interactions, (2) course-related subject questions, representing knowledge-intensive Q\&A scenarios, and (3) learning-oriented interactions, which capture more complex, dialog-based support. Together, these use cases cover a spectrum from simple factual queries to pedagogically rich interactions and thus provide a balanced foundation for evaluating both system performance and educational value.
 
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[
-box/.style={
-draw,
-rectangle,
-align=center,
-minimum width=7cm,
-minimum height=1cm
-},
-nlabel/.style={
-align=left
-},
-arrow/.style={
-->,
-thick
-}
-]
-
-% Boxes left
-
-\node[box] (raw)
-{Raw data from Langfuse};
-
-\node[box, below=1.2cm of raw] (filter)
-{Rule-based pre-filtering\\
-\& duplicate removal};
-
-\node[box, below=1.2cm of filter] (embed)
-{Multilingual embedding};
-
-\node[box, below=1.2cm of embed] (cluster)
-{Dimensionality reduction \&\\
-density-based clustering};
-
-\node[box, below=1.2cm of cluster] (manual)
-{Manual aggregation};
-
-
-% Arrows
-
-\draw[arrow] (raw) -- (filter);
-\draw[arrow] (filter) -- (embed);
-\draw[arrow] (embed) -- (cluster);
-\draw[arrow] (cluster) -- (manual);
-
-
-% Right side (n-values)
-
-\node[nlabel, right=2cm of raw]
-{13,000 prompts};
-
-\node[nlabel, right=2cm of filter]
-{11,778 prompts};
-
-\node[nlabel, right=2cm of embed]
-{---};
-
-\node[nlabel, right=2cm of cluster]
-{69 clusters + outliers};
-
-\node[nlabel, right=2cm of manual]
-{7 aggregated categories};
-
-\end{tikzpicture}
-\caption{Process of data-driven use case identification}
-\label{fig:usecase_process}
-\end{figure}
-
-\subsection{Multidimensional Evaluation Framework}
+\subsection{Multidimensional Comparative Evaluation Framework}
 
 \paragraph{RAGAS: Automatic Evaluation Along the RAG Dimensions}
 
-To enable a scalable and systematic assessment of the developed RAG chatbot, the evaluation was conducted using the Retrieval-Augmented Generation Assessment System (RAGAS) \autocite{es2025ragas}. RAGAS was selected because it is a widely used framework for the automatic evaluation of RAG pipelines and allows quality to be assessed along the central dimensions of retrieval effectiveness, generation quality, and factual correctness. The framework is particularly suitable for applied settings in which large numbers of heterogeneous queries must be evaluated and manually created reference answers are not available.
+To enable a scalable and systematic assessment of the developed RAG chatbot, the evaluation was conducted using the Retrieval-Augmented Generation Assessment System (RAGAS) \autocite{es2025ragas}. RAGAS was selected because it is a widely used framework for the automatic evaluation of RAG pipelines and allows quality to be assessed along the central dimensions of retrieval effectiveness, generation quality, and factual correctness. The framework is particularly suitable for applied settings in which large numbers of heterogeneous queries must be evaluated and manually created reference answers are not available. This approach is particularly relevant in educational environments, where large-scale manual annotation is difficult and controlled evaluations with reference answers are rarely feasible.
 
-Evaluating RAG systems differs from the evaluation of purely generative models, as the final output depends on both the retrieved context and the language model’s generation \autocite{Yu2024RAGEvalSurvey}. Errors may originate from different stages of the pipeline, such as retrieving irrelevant documents, insufficient integration of multiple context passages, or hallucinated statements despite the availability of correct evidence. Consequently, evaluation must consider retrieval performance, generation quality, and the factual grounding of the produced answers \autocite{Yu2024RAGEvalSurvey, es2025ragas}.
+RAGAS operationalizes evaluation along the RAG dimensions by providing automated metrics that quantify the effectiveness of individual RAG components \autocite{es2025ragas}. In this study, the metrics \textit{Answer Relevancy}, \textit{Context Relevance}, and \textit{Faithfulness} were used. \textit{Answer Relevancy} measures the semantic alignment between the user query and the generated response. \textit{Context Relevance} evaluates whether the retrieved context segments are suitable for answering the query and therefore reflects the effectiveness of the retrieval step. \textit{Faithfulness} assesses whether the generated answer is supported by the provided context and does not contain unsupported or hallucinated information. Together, these metrics provide a quantitative approximation of retrieval quality, generation quality, and factual correctness.
 
-RAGAS operationalizes this multi-stage perspective by providing automated metrics that quantify the effectiveness of individual RAG components \autocite{es2025ragas}. In this study, the metrics \textit{Answer Relevancy}, \textit{Context Relevance}, and \textit{Faithfulness} were used. \textit{Answer Relevancy} measures the semantic alignment between the user query and the generated response. \textit{Context Relevance} evaluates whether the retrieved context segments are suitable for answering the query and therefore reflects the effectiveness of the retrieval step. \textit{Faithfulness} assesses whether the generated answer is supported by the provided context and does not contain unsupported or hallucinated information. Together, these metrics provide a quantitative approximation of retrieval quality, generation quality, and factual correctness.
+The evaluation was based on a curated set of 60 questions representing the use cases of technical support queries and course-related subject questions. For each evaluation instance, the user query, the generated answer, and the context segments used during answer generation were passed to the RAGAS framework. This ensured that the evaluation reflected the actual system behavior rather than an idealized retrieval output and enabled a direct comparison between system versions. To reduce the influence of stochastic effects in LLM-based evaluation, each question was processed five times and the resulting metric values were averaged. The scoring itself was performed using a separate large language model acting as the evaluation model, ensuring consistent scoring across all samples.
 
-A key advantage of RAGAS is that it enables evaluation without predefined ground-truth answers. Instead of comparing system outputs to manually created reference responses, the framework uses a large language model as an evaluation instance (“LLM-as-a-judge”), which allows scalable assessment of real system responses under realistic conditions \autocite{es2025ragas, Yu2024RAGEvalSurvey}. This approach is particularly relevant in educational environments, where large-scale manual annotation is difficult and controlled evaluations with reference answers are rarely feasible.
+While the automated RAGAS evaluation provides a quantitative view of retrieval effectiveness, answer relevance, and factual grounding, it cannot fully capture pedagogical quality, as it does not accoutn for the third use case, or perceived usefulness, which are particularly relevant in educational applications. Therefore, RAGAS was used as the core component of the automatic evaluation and complemented by additional evaluation methods within the overall study design.
 
-The evaluation was based on a curated set of 60 questions representing the previously defined use-case categories, including technical support, course-related knowledge questions, and learning-support interactions. For each evaluation instance, the user query, the generated answer, and the context segments used during answer generation were passed to the RAGAS framework. This ensured that the evaluation reflected the actual system behavior rather than an idealized retrieval output and enabled a direct comparison between system versions.
-
-To reduce the influence of stochastic effects in LLM-based evaluation, each question was processed multiple times and the resulting metric values were aggregated. The scoring itself was performed using a separate large language model acting as the evaluation model, ensuring consistent scoring across all samples. The aggregated results were stored in structured form and used for the comparative analysis of the baseline system and the extended architecture.
-
-While the automated RAGAS evaluation provides a quantitative view of retrieval effectiveness, answer relevance, and factual grounding, it cannot fully capture pedagogical quality or perceived usefulness, which are particularly relevant in educational applications. Therefore, RAGAS was used as the core component of the automatic evaluation and complemented by additional evaluation methods within the overall study design.
-
-\paragraph{Human evaluation}
-\subparagraph{Expert blind assessment}
+\paragraph{Expert blind assessment: Gaining insights into perceived quality and educational value}
 
 To complement automated evaluation, an expert-based blind test was conducted to comparatively assess the two RAG systems. The evaluation followed an A/B design in which experts were presented with two system responses (A/B) per prompt in an identical interface, without knowledge of the underlying system configuration. This setup is inspired by arena-style evaluation approaches commonly used for generative models, which aim to reduce expectation and confirmation bias in human judgments \autocite{khan2025ragbenchmark}.
 
@@ -108,12 +32,12 @@ To complement automated evaluation, an expert-based blind test was conducted to 
     \label{fig:expert_blindtest}
 \end{figure}
 
-The study was conducted as moderated one-on-one sessions with a duration of approximately 30 to 60 minutes per participant. In total, 14 experts participated, including authors of e-learning content, educators, and domain experts from applied research and academic institutions. The evaluation followed a standardized procedure: First, participants were introduced to the evaluation setup and rating criteria. Next, representative use cases (cf. Section 4.1) were presented together with curated prompts derived from historical user queries. For each prompt, two system outputs were displayed in randomized order (see Figure~\ref{fig:expert_blindtest}). Participants evaluated both responses independently using a five-point Likert scale (1 = strongly disagree, 5 = strongly agree). In addition, participants were asked to verbalize their reasoning in a think-aloud setting, which was recorded and transcribed for qualitative analysis.
+The study was conducted as moderated one-on-one sessions with a duration of approximately 30 to 60 minutes per participant. In total, 14 experts participated, including authors of e-learning content, educators, and domain experts from applied research and academic institutions. The evaluation followed a standardized procedure: First, participants were introduced to the evaluation setup and rating criteria. Next, the synthesized use cases were presented together with curated prompts derived from historical user queries. For each prompt, two system outputs were displayed in randomized order (\autoref{fig:expert_blindtest}). Participants evaluated both responses independently using a five-point Likert scale (1 = strongly disagree, 5 = strongly agree). In addition, participants were asked to verbalize their reasoning in a think-aloud setting, which was recorded and transcribed for qualitative analysis.
 
 The evaluation combined quantitative and qualitative assessment to enable a comprehensive comparison of system performance. Quantitatively, responses were rated across multiple dimensions, including correctness, completeness, relevance, coherence, clarity, and didactic value. These criteria capture both technical answer quality and pedagogical effectiveness, which are particularly relevant in educational chatbot settings. Qualitatively, the think-aloud transcripts provide insights into expert decision-making processes, perceived strengths and weaknesses, and domain-specific expectations. This mixed-methods approach allows not only for a systematic comparison of both systems but also for a deeper understanding of how differences in system design affect perceived answer quality.
 
 
-\subparagraph{User blind assessment}
+\subparagraph{User blind assessment: Gaining quantitive insights}
 %Zitho
 
 \begin{figure}[htbp]
