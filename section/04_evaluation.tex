@@ -2,10 +2,85 @@
 
 \subsection{Data Basis}
 
+First, the identified gap regarding the lack of use case orientation in the evaluation datasets is addressed. In the educational context it is crucial that the interactions being tested reflect real user needs, as the quality of a system is largely determined by its practical applicability. A data-driven approach for identifying and synthesizing use cases was developed. The use of real interaction data ensures that the derived use cases are not hypothetically constructed but are empirically grounded. This provides an essential foundation for the subsequent evaluation, as the performance of the systems is examined across practice-relevant scenarios, thereby achieving higher external validity.
+
+The starting point was approximately $13,000$ real prompts from logging platform of the productive chatbot, which capture actual user interactions. This raw dataset was first subjected to rule-based pre-filtering, during which irrelevant or technically flawed entries were removed and duplicates were cleaned up. This resulted in a cleaned dataset of $11,778 prompts$, which served as the basis for further analysis.
+In the next step, the remaining prompts were mapped into a semantic vector space using a multilingual embedding model. This enables language-independent representation of the content and is particularly relevant in heterogeneous learning environments where different languages are used. Building on this, dimensionality reduction and density-based clustering were performed to identify structural patterns within the usage queries. This step resulted in the formation of 69 clusters as well as additional outliers that could not be clearly assigned.
+Since purely data-driven clusters do not necessarily represent directly interpretable usage scenarios, a manual aggregation was performed in the final step. In this process, clusters with related content were merged and abstracted into higher-level use cases. The result of this process is seven central usage categories that systematically map the actual interaction patterns of users.
+From these categories, three representative use cases were selected for the evaluation to ensure both coverage and comparability. These include (1) technical support queries, which reflect administrative and platform-related interactions, (2) course-related subject questions, representing knowledge-intensive Q\&A scenarios, and (3) learning-oriented interactions, which capture more complex, dialog-based support. Together, these use cases cover a spectrum from simple factual queries to pedagogically rich interactions and thus provide a balanced foundation for evaluating both system performance and educational value.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+box/.style={
+draw,
+rectangle,
+align=center,
+minimum width=7cm,
+minimum height=1cm
+},
+nlabel/.style={
+align=left
+},
+arrow/.style={
+->,
+thick
+}
+]
+
+% Boxes left
+
+\node[box] (raw)
+{Raw data from Langfuse};
+
+\node[box, below=1.2cm of raw] (filter)
+{Rule-based pre-filtering\\
+\& duplicate removal};
+
+\node[box, below=1.2cm of filter] (embed)
+{Multilingual embedding};
+
+\node[box, below=1.2cm of embed] (cluster)
+{Dimensionality reduction \&\\
+density-based clustering};
+
+\node[box, below=1.2cm of cluster] (manual)
+{Manual aggregation};
+
+
+% Arrows
+
+\draw[arrow] (raw) -- (filter);
+\draw[arrow] (filter) -- (embed);
+\draw[arrow] (embed) -- (cluster);
+\draw[arrow] (cluster) -- (manual);
+
+
+% Right side (n-values)
+
+\node[nlabel, right=2cm of raw]
+{13,000 prompts};
+
+\node[nlabel, right=2cm of filter]
+{11,778 prompts};
+
+\node[nlabel, right=2cm of embed]
+{---};
+
+\node[nlabel, right=2cm of cluster]
+{69 clusters + outliers};
+
+\node[nlabel, right=2cm of manual]
+{7 aggregated categories};
+
+\end{tikzpicture}
+\caption{Process of data-driven use case identification}
+\label{fig:usecase_process}
+\end{figure}
+
 \subsection{Multidimensional Evaluation Framework}
 
-\paragraph{RAGAS}
-\subparagraph{Automatic Evaluation Along the RAG Dimensions}
+\paragraph{RAGAS: Automatic Evaluation Along the RAG Dimensions}
 
 To enable a scalable and systematic assessment of the developed RAG chatbot, the evaluation was conducted using the Retrieval-Augmented Generation Assessment System (RAGAS) \autocite{es2025ragas}. RAGAS was selected because it is a widely used framework for the automatic evaluation of RAG pipelines and allows quality to be assessed along the central dimensions of retrieval effectiveness, generation quality, and factual correctness. The framework is particularly suitable for applied settings in which large numbers of heterogeneous queries must be evaluated and manually created reference answers are not available.
 
