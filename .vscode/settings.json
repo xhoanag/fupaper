@@ -1,6 +1,17 @@
 {
   "latex-workshop.latex.tools": [
     {
+      "name": "latexmk (xelatex)",
+      "command": "latexmk",
+      "args": [
+        "-xelatex",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "%DOC%"
+      ]
+    },
+    {
       "name": "xelatex",
       "command": "xelatex",
       "args": [
@@ -20,6 +31,12 @@
   ],
   "latex-workshop.latex.recipes": [
     {
+      "name": "latexmk (xelatex)",
+      "tools": [
+        "latexmk (xelatex)"
+      ]
+    },
+    {
       "name": "xelatex -> biber -> xelatex*2",
       "tools": [
         "xelatex",
@@ -29,6 +46,7 @@
       ]
     }
   ],
+  "latex-workshop.latex.recipe.default": "first",
   "latex-workshop.latex.autoBuild.run": "onSave",
   "latex-workshop.view.pdf.viewer": "tab"
 }
