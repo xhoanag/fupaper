@@ -12,13 +12,15 @@ The user blind assessment in the form of a Chatbot Arena effectively supplements
 While automated metrics like RAGAS struggle with qualitative dimensions, human evaluators naturally assess aspects such as tone, structural clarity, and overall comprehensibility.
 However, interpreting these preferences in an educational context requires caution.
 The arena measures perceived response quality rather than actual learning outcomes.
-Evaluators may favor responses that are confidently formulated or that provide direct solutions, even though a less direct, Socratic approach might offer higher pedagogical value.
+Evaluators may favor responses that are confidently formulated or that are confidently formulated or structurally verbose, a cognitive bias in human preference testing of large language models documented e.g. by \autocite{Zheng2023LMSYSArena}.
+Furthermore, users often prefer direct solutions, even though a less direct, Socratic approach where the system acts as a scaffold rather than an answer key has been shown to offer significantly higher pedagogical value \autocite{KASNECI2023102274}.
 Additionally, the substantial rate of tied or rejected outcomes (17.5\% combined) indicates that technical architectural differences between the system variants (V1 and V2) often remain imperceptible to end users in practical application.
 
 Like the RAGAS evaluation, the methodological design of the Arena presents specific limitations.
 Relying on a predetermined set of single-turn questions ensures internal validity and allows for standardized A/B comparisons, but it limits external validity.
 Restricting users from freely prompting the system prevents the evaluation of the model under fully realistic, dynamic conditions.
 Most importantly, the single-turn, context-free design precludes the assessment of continuous dialogue and conversational memory.
+As \autocite{Deriu2021} note, static single-turn evaluations are often inadequate for capturing the performance of multi-turn conversational systems.
 Complex pedagogical interactions, such as those intended by the Socratic learning assistant developed in this work, cannot be adequately evaluated through isolated Q\&A pairs.
 While the structured Arena provides a necessary baseline for general user acceptance, future evaluations of educational chatbots require scenario-based testing approaches.
 Allowing users to engage in multi-turn, goal-oriented dialogues would provide a more accurate assessment of scaffolded knowledge transfer while maintaining measurable experimental control and dialogic knowledge transfer.
