@@ -1,44 +1,41 @@
 \section{Key Results}
 
 \subsection{RAGAS}
-\paragraph{Descriptive Results}
 
-Figure~\ref{fig:ragas1} shows the aggregated mean values, standard deviations, and 95\% confidence intervals of the evaluated metrics (\textit{Answer Relevancy}, \textit{Context Relevance}, and \textit{Faithfulness}) for both system versions. Points indicate the mean values ($\mu$), the lighter vertical bars represent the standard deviation (SD), and the darker bars indicate the 95\% confidence interval (CI).
-
-For \textit{Answer Relevancy}, V1 achieves a higher mean value ($\mu = 0.805$, $\sigma = 0.138$) than V2 ($\mu = 0.750$, $\sigma = 0.119$), with clearly separated confidence intervals. For \textit{Context Relevance}, the pattern is reversed: V2 reaches a higher mean value ($\mu = 0.812$, $\sigma = 0.336$) than V1 ($\mu = 0.758$, $\sigma = 0.373$), while the variance is higher for both versions compared to \textit{Answer Relevancy}. For \textit{Faithfulness}, the mean values are close to each other (V1: $\mu = 0.880$, $\sigma = 0.203$; V2: $\mu = 0.855$, $\sigma = 0.228$), and the confidence intervals overlap.
+The top half of \autoref{fig:ragas1} shows the descriptive results of the RAGAS evaluation by displayingthe aggregated mean values, standard deviations, and $95\%$ confidence intervals of the evaluated metrics (\textit{Answer Relevancy}, \textit{Context Relevance}, and \textit{Faithfulness}) for both system versions. Points indicate the mean values ($\mu$), the lighter vertical bars represent the standard deviation ($\sigma$), and the darker bars indicate the $95\%$ confidence interval (CI). For \textit{Answer Relevancy}, V1 achieves a higher mean value ($\mu = 0.805$, $\sigma = 0.138$) than V2 ($\mu = 0.750$, $\sigma = 0.119$), with clearly separated confidence intervals. For \textit{Context Relevance}, the pattern is reversed: V2 reaches a higher mean value ($\mu = 0.812$, $\sigma = 0.336$) than V1 ($\mu = 0.758$, $\sigma = 0.373$), while the variance is higher for both versions compared to \textit{Answer Relevancy}. For \textit{Faithfulness}, the mean values are close to each other (V1: $\mu = 0.880$, $\sigma = 0.203$; V2: $\mu = 0.855$, $\sigma = 0.228$), and the confidence intervals overlap.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\linewidth]{figures/ragas1.jpg}
-\caption{Descriptive overview of RAGAS metrics including mean values, standard deviations, and 95\% confidence intervals}
+\caption{Descriptive overview of RAGAS metrics including mean values, standard deviations, and $95\%$ confidence intervals}
 \label{fig:ragas1}
 \end{figure}
 
-\paragraph{Paired Differences and Significance Tests}
-
-Paired comparisons between V1 and V2 were conducted using both a paired $t$-test and a Wilcoxon signed-rank test. Positive differences indicate higher scores for V2, while negative differences indicate higher scores for V1.
-
-For \textit{Answer Relevancy}, the mean difference (V2 -- V1) is $-0.055$, indicating higher scores for V1. The difference is statistically significant ($t = 4.285$, $p < 0.001$; Wilcoxon test also significant).
-
-For \textit{Context Relevance}, the mean difference is $+0.053$, indicating higher scores for V2. The difference is statistically significant ($t = 2.088$, $p = 0.021$; Wilcoxon test significant).
-
-For \textit{Faithfulness}, the mean difference is $-0.025$. The result is not statistically significant ($t = 1.031$, $p = 0.153$; Wilcoxon test not significant).
+The bottom half of \autoref{fig:ragas1} presents the results of statistical tests conducted using both a one-tailed, paired $t$-test and Wilcoxon signed-rank test. The hypotheses, test statistics, $p$-values and the test decision are reported for each metric. For \textit{Answer Relevancy}, the mean difference (V2 -- V1) is $-0.055$, indicating higher scores for V1. The difference is statistically significant ($t = 4.285$, $p < 0.001$; Wilcoxon test also significant). For \textit{Context Relevance}, the mean difference is $+0.053$, indicating higher scores for V2. The difference is statistically significant ($t = 2.088$, $p = 0.021$; Wilcoxon test significant). For \textit{Faithfulness}, the mean difference is $-0.025$. The result is not statistically significant ($t = 1.031$, $p = 0.153$; Wilcoxon test not significant).
 
 \subsection{Expert blind assessment}
 
-The expert blind test provides a differentiated assessment of the two system versions (V1 and V2). While the questionnaire-based ratings reveal statistically significant differences across specific use cases and evaluation dimensions, the accompanying think-aloud data offer additional insight into how experts perceived the qualitative differences between both systems. One expert interview was excluded from the analysis because essential course vectors were isolated as technical outliers in the vector database and were therefore not retrievable, which would have distorted comparability with the remaining cases.
+The expert blind test provides a differentiated assessment of the two system versions. The questionnaire-based ratings reveal statistically significant differences across specific use cases and evaluation dimensions, while the accompanying think-aloud data offer additional insight into how experts perceived the qualitative differences between both systems. One expert interview was excluded from the analysis because essential course vectors were isolated as technical outliers in the vector database and were therefore not retrievable, which would have distorted comparability with the remaining cases.
 
 With regard to the use-case-level evaluation, the results show a mixed but overall favorable pattern for V2. In the technical support use case, V2 performed significantly worse than V1 ($p = 0.002$), indicating that the earlier system version was judged more positively for administrative and fact-oriented requests. In contrast, V2 achieved a slight but significant improvement in course-related subject questions ($p = 0.036$). The strongest advantage for V2 emerged in the learning assistance use case, where it was rated significantly better than V1 ($p < 0.001$). This suggests that the revised architecture was particularly beneficial for prompts requiring didactic guidance and learning-oriented interaction rather than simple factual retrieval.
 
 A more fine-grained analysis by evaluation dimension further clarifies these differences. V2 achieved significantly higher ratings in learning support/didactics ($p < 0.01$) and relevance ($p < 0.01$). By contrast, content correctness and clarity/structure did not differ significantly between the two versions, indicating a broadly comparable level of perceived factual quality and comprehensibility. For completeness/efficiency, V1 showed a slight but non-significant advantage. Context integration/coherence showed a mean advantage for V2, although this difference did not reach statistical significance and displayed greater variance across cases. Overall, the cleaned aggregate comparison still indicates a slight but statistically significant advantage for V2.
 
-The qualitative think-aloud analysis helps explain these quantitative findings. Experts consistently described V2 as more supportive of learning and in some cases explicitly referred to it as a ``Socratic learning assistant.'' In particular, V2 was perceived as better at prompting reflection and incorporating metacognitive elements, which is highly relevant for educational chatbot design. Experts also evaluated V2 more positively with regard to UX and transparency, especially due to improved link presentation and visible streaming behavior. The streaming output was interpreted as a useful signal that the system was still processing the request, which improved the perceived interaction quality.
+The qualitative think-aloud analysis helps explain these quantitative findings. Experts consistently described V2 as more supportive of learning and in some cases explicitly referred to it as a \enquote{Socratic learning assistant}. In particular, V2 was perceived as better at prompting reflection and incorporating metacognitive elements, which is highly relevant for educational chatbot design. Experts also evaluated V2 more positively with regard to UX and transparency, especially due to improved link presentation and visible streaming behavior. The streaming output was interpreted as a useful signal that the system was still processing the request, which improved the perceived interaction quality.
 
-At the same time, the think-aloud comments also revealed important limitations of V2. In terms of answer quality, experts characterized V1 as more likely to provide concise ``high-level'' answers, whereas V2 was perceived as integrating course-specific context more deeply. This difference was described primarily as one of abstraction level and contextual depth rather than simple quality superiority. Moreover, V2 received some critical comments regarding language consistency, especially when English prompt structures appeared in otherwise German interactions, which led to perceived inconsistency and uncertainty. This indicates that linguistic coherence is a sensitive quality criterion in educational settings that may not be fully captured by structured rating scales alone. Regarding references, experts considered both systems largely comparable, with no clear advantage for either version. Finally, latency was consistently perceived in favor of V1, which was judged to respond faster.
+At the same time, the think-aloud comments also revealed important limitations of V2. In terms of answer quality, experts characterized V1 as more likely to provide concise \enquote{high-level} answers, whereas V2 was perceived as integrating course-specific context more deeply. This difference was described primarily as one of abstraction level and contextual depth rather than simple quality superiority. Moreover, V2 received some critical comments regarding language consistency, especially when English prompt structures appeared in otherwise German interactions, which led to perceived inconsistency and uncertainty. This indicates that linguistic coherence is a sensitive quality criterion in educational settings that may not be fully captured by structured rating scales alone. Regarding references, experts considered both systems largely comparable, with no clear advantage for either version. Finally, latency was consistently perceived in favor of V1, which was judged to respond faster.
 
 Taken together, the expert blind test shows that V2 did not improve all aspects of performance equally, but it did yield meaningful gains in those dimensions most closely related to the paper’s educational objective: relevance, didactic quality, and learning-oriented interaction. 
 
 \subsection{User blind assessment}
+
+The Chatbot Arena yielded a total of 458 valid judgments from the pairwise, blind comparisons, as shown in \autoref{fig:arena_evaluation}.
+Of these interactions, 64 responses ($14.0\%$) were rated as ties by the participants, indicating comparable quality between the two models, while 16 cases ($3.5\%$) resulted in a \enquote{both bad} rating, representing queries where neither system produced a satisfactory answer.
+
+Focusing solely on the decided matchups where participants established a clear preference ($N=378$), version~1 was preferred in 197 instances ($52.1\%$), whereas the version~2 was preferred in 181 instances ($47.9\%$).
+To determine whether this observed preference for the baseline model was statistically significant, we conducted a two-sided exact binomial test against the null hypothesis that both models were equally likely to be favored ($\pi=0.5$).
+The resulting $p$-value of $0.440$ ($p \geq 0.05$) indicates that the difference in user preference is not statistically significant.
+Therefore, while V1 maintained a slight nominal edge in direct, blind comparison, the aggregated preference signal suggests that users perceive the response quality of the two RAG models to be statistically indistinguishable in practical application.
 
 \begin{figure}[htbp]
 \centering
@@ -46,19 +43,12 @@ Taken together, the expert blind test shows that V2 did not improve all aspects 
 \caption{Voting results of the user blind assessment in an Arena setting}
 \label{fig:arena_evaluation}
 \end{figure}
-The Chatbot Arena yielded a total of 458 valid judgments from the pairwise, blind comparisons, as shown in \autoref{fig:arena_evaluation}.
-Of these interactions, 64 responses (14.0\%) were rated as ties by the participants, indicating comparable quality between the two models, while 16 cases (3.5\%) resulted in a "both bad" rating, representing queries where neither system produced a satisfactory answer.
-
-Focusing solely on the decided matchups where participants established a clear preference ($N = 378$), the baseline model (V1) was preferred in 197 instances (52.1\%), whereas the revised model (V2) was preferred in 181 instances (47.9\%).
-To determine whether this observed preference for the baseline model was statistically significant, we conducted a two-sided exact binomial test against the null hypothesis that both models were equally likely to be favored ($\pi = 0.5$).
-The resulting p-value of 0.440 ($p \geq 0.05$) indicates that the difference in user preference is not statistically significant.
-Therefore, while V1 maintained a slight nominal edge in direct, blind comparison, the aggregated preference signal suggests that users perceive the response quality of the two RAG models to be statistically indistinguishable in practical application.
 
 \subsection{Cost analysis}
 
-The results shown in \autoref{fig:cost_analysis} illustrate the key effects of the architectural evolution from V1 to V2 in terms of cost and latency. Overall, there is a significant increase in the average cost per prompt from €0.0133 (V1) to €0.0475 (V2), which represents more than a threefold increase. This cost increase is primarily attributable to higher token consumption, particularly due to additional pipeline components such as reranking and more complex retrieval processes. The increase is not evenly distributed but is driven primarily by additional input tokens in reranking and by the expanded multi-hop processing, while the increase in output tokens is comparatively moderate.
+The results shown in \autoref{fig:cost_analysis} illustrate the key effects of the architectural evolution from V1 to V2 in terms of cost and latency. Overall, there is a significant increase in the average cost per prompt from $0.0133 €$ (V1) to $0.0475 €$ (V2), which represents more than a threefold increase. This cost increase is primarily attributable to higher token consumption, particularly due to additional pipeline components such as reranking and more complex retrieval processes. The increase is not evenly distributed but is driven primarily by additional input tokens in reranking and by the expanded multi-hop processing, while the increase in output tokens is comparatively moderate.
 
-A significant deterioration can also be observed in terms of response times. The average total latency increases from 3.24 seconds in V1 to 6.21 seconds in V2. At the same time, the time-to-first-token (TTFT) increases to 5.77 seconds. However, the figure also shows that a significant portion of this additional latency is attributable to the newly introduced reranking. Streaming does little to alleviate the increased latency, since response generation takes less than a second on average, but it does reduce the TTFT.
+A significant deterioration can also be observed in terms of response times. The average total latency increases from $3.24$ seconds in V1 to $6.21$ seconds in V2. At the same time, the time-to-first-token (TTFT) increases to $5.77$ seconds. However, the figure also shows that a significant portion of this additional latency is attributable to the newly introduced reranking. Streaming does little to alleviate the increased latency, since response generation takes less than a second on average, but it does reduce the TTFT.
 
 \begin{figure}[htbp]
 \centering
