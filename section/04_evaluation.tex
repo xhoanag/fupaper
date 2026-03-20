@@ -38,7 +38,10 @@ The evaluation combined quantitative and qualitative assessment to enable a comp
 
 
 \subparagraph{User blind assessment: Gaining quantitive insights}
-CURRENTLY IN WORK, NOT INCLUDED IN THE PAPER YET
+
+In contrast to the expert interviews, which provide in-depth, qualitative insights from domain specialists, the Chatbot Arena captures aggregated preference signals from a broader user group under standardized conditions. This allows for a more behavior-oriented assessment of perceived response quality, complementing the expert-driven analysis with scalable, user-centered evidence. Together, both approaches enable a more comprehensive evaluation by combining structured judgment with real user perception.
+
+The Chatbot Arena, depicted in \autoref{fig:user_blindtest}, was designed as a controlled evaluation platform for pairwise model comparisons and is methodologically based on the principles of the  Large Model Systems Organization (LMSYS) Chatbot Arena \autocite{Zheng2023LMSYSArena}. The goal is not free interaction, but rather the standardized evaluation of response quality under controlled conditions. To this end, a blind A/B setup is used: participants see two responses to the same question and choose between \textit{A}, \textit{B}, \textit{tie}, or \textit{both bad}. Pairwise preference comparisons are considered a robust evaluation method, as relative judgments are cognitively more consistent than absolute ratings \autocite{Thurstone1927ComparativeJudgment, BradleyTerry1952PairedComparisons} and generate an aggregatable preference signal. For experimental control purposes, the 60 questions in the RAGAS evaluation were divided into four subsets. Responses are dynamically generated for each session to ensure realistic conditions. Assignment is balanced using a round-robin procedure, ensuring even load distribution and sample representation \autocite{Dillman2014TailoredDesign,Tourangeau2000SurveyResponse}. At the same time, this division reduces fatigue; approximately 15 questions are evaluated per participant. Additionally, the order of the answers is randomized to minimize presentation bias and ensure internal validity \autocite{Kohavi2020TrustworthyExperiments,Joachims2017UnbiasedLTR}.
 
 \begin{figure}[htbp]
     \centering
