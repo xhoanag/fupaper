@@ -1,5 +1,5 @@
 \section{System Architecture}
-
+% Kürzen?
 The architectural evolution investigated in this work is illustrated in \autoref{fig:workflow_vergleich}, which contrasts two conceptually distinct system designs. Version 1 (V1) represents a naive RAG pipeline, while Version 2 (V2) reflects a transition toward a more advanced and partially modular architecture inspired by recent developments in RAG research.
 
 As shown in \autoref{fig:workflow_vergleich}(a), V1 follows a strictly linear workflow consisting of contextualization, semantic retrieval, generation, and postprocessing. This design corresponds to what the literature describes as Naive RAG, where retrieved documents are directly appended to the prompt without further refinement or adaptive control. While such architectures are straightforward to implement, they exhibit well-documented limitations, particularly in retrieval precision, handling of complex queries, and robustness against irrelevant context. These limitations were also evident in the analyzed system, which relied on rigid workflows, limited ingestion capabilities, and hardcoded logic.
