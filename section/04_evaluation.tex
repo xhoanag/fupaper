@@ -2,13 +2,73 @@
 
 \subsection{Data Basis}
 \label{data_basis}
-% Tabelle für Datengrundlage --> Tortendiagramm als Tabelle, um die Verteilung der Use Cases zu zeigen: Klares Strukturieren der Datengrundlage
 First, the identified gap regarding the lack of use case orientation in the evaluation datasets is addressed. In the educational context it is crucial that the interactions being tested reflect real user needs, as the quality of a system is largely determined by its practical applicability. A data-driven approach for identifying and synthesizing use cases was developed. The use of real interaction data ensures that the derived use cases are not hypothetically constructed but are empirically grounded. This provides an essential foundation for the subsequent evaluation, as the performance of the systems is examined across practice-relevant scenarios, thereby achieving higher external validity.
 
-The starting point was approximately $13,000$ real prompts from logging platform of the productive chatbot, which capture actual user interactions. This raw dataset was first subjected to rule-based pre-filtering, during which irrelevant or technically flawed entries were removed and duplicates were cleaned up. This resulted in a cleaned dataset of $11,778$ prompts, which served as the basis for further analysis.
+The starting point was approximately $13,000$ real prompts from logging platform of the productive chatbot, which capture actual user interactions. This raw dataset was first subjected to rule-based pre-filtering, during which irrelevant or technically flawed entries were removed and duplicates were cleaned up. This resulted in a cleaned dataset of $11,778$ prompts, which served as the basis for further analysis  (see \autoref{tab:data-processing} for an overview of the data processing pipeline).
 In the next step, the remaining prompts were mapped into a semantic vector space using a multilingual embedding model. This enables language-independent representation of the content and is particularly relevant in heterogeneous learning environments where different languages are used. Building on this, dimensionality reduction and density-based clustering were performed to identify structural patterns within the usage queries. This step resulted in the formation of 69 clusters as well as additional outliers that could not be clearly assigned.
 Since purely data-driven clusters do not necessarily represent directly interpretable usage scenarios, a manual aggregation was performed in the final step. In this process, clusters with related content were merged and abstracted into higher-level use cases. The result of this process is seven central use case categories that systematically map the actual interaction patterns of users.
 From these categories, three representative use cases were selected for the evaluation to ensure both coverage and comparability. These include (1) technical support queries, which reflect administrative and platform-related interactions, (2) course-related subject questions, representing knowledge-intensive Q\&A scenarios, and (3) learning-oriented interactions, which capture more complex, dialog-based support. Together, these use cases cover a spectrum from simple factual queries to pedagogically rich interactions and thus provide a balanced foundation for evaluating both system performance and educational value.
+
+\begin{table}[htbp]
+\centering
+\renewcommand{\arraystretch}{1.2} % improves vertical spacing
+\setlength{\tabcolsep}{5pt}       % horizontal cell padding
+
+\begin{tabularx}{\linewidth}{
+    >{\hspace{0.6em}\raggedright\arraybackslash}p{2.1cm}
+    >{\hspace{0.4em}\raggedright\arraybackslash}X
+    >{\hspace{0.4em}\raggedright\arraybackslash}p{3.2cm}
+    >{\centering\arraybackslash}p{2.2cm}
+    >{\hspace{0.4em}\raggedright\arraybackslash}p{2.7cm}
+}
+\toprule
+\textbf{Stage} & \textbf{Description} & \textbf{Method / Rule} & \textbf{Observations Remaining} & \textbf{Output} \\
+\midrule
+Trace extraction 
+& Retrieved Langfuse traces from the source system 
+& Direct extraction via langfuse API
+& 12,898 
+& Trace dataset  \\
+
+Prompt extraction 
+& Extracted raw prompts from the traces and stored them in a structured file  
+& Python parsing script; JSON serialization 
+& 12,898 
+& JSON prompt dataset \\
+
+Prompt filtering 
+& Removed duplicate entries, irrelevant prompts (e.g. insults, empty prompts, greetings etc.) 
+& Rule-based filtering 
+& 11,778 
+& Filtered prompt dataset \\
+
+Semantic Prompt clustering 
+& Grouped semantically similar prompts into clusters based on vector representations 
+& Embedding-based clustering using sentence-transformers model
+& 11,778 
+& 70 automatically generated prompt clusters \\
+
+Outlier removal 
+& Removed prompts that could not be clearly assigned to any cluster (outliers) 
+& Rule-based filtering based on distance thresholds in the embedding space
+& 8,069 
+& 69 automatically generated prompt clusters \\
+
+Cluster consolidation 
+& Reviewed the 69 automatically generated clusters and consolidated them into 7 broader thematic groups 
+& Manual thematic grouping based on semantic coherence and conceptual fit 
+& 8,069
+& 7 high-level prompt clusters \\ 
+\bottomrule
+\end{tabularx}
+
+\caption{Overview of the data processing pipeline from raw Langfuse traces to the final prompt clusters from which the use cases were derived.}
+\label{tab:data-processing}
+
+\vspace{0.3em}
+\parbox{\linewidth}{\footnotesize \textit{Final high-level prompt clusters:} technical support; course-related formalities; course-related subject questions; chatbot feature related prompts; miscellaneous; negative feedback; polite phrases}
+\end{table}
+
 
 \subsection{Multidimensional Comparative Evaluation Approach}
 
