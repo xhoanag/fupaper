@@ -20,7 +20,7 @@ RAGAS operationalizes evaluation along the RAG dimensions by providing automated
 
 The evaluation was based on a curated set of 60 questions representing the use cases of technical support queries and course-related subject questions. For each evaluation instance, the user query, the generated answer, and the context segments used during answer generation were passed to the RAGAS framework. This ensured that the evaluation reflected the actual system behavior rather than an idealized retrieval output and enabled a direct comparison between system versions. To reduce the influence of stochastic effects in LLM-based evaluation, each question was processed five times and the resulting metric values were averaged. The scoring itself was performed using a separate large language model acting as the evaluation model, ensuring consistent scoring across all samples.
 
-While the automated RAGAS evaluation provides a quantitative view of retrieval effectiveness, answer relevance, and factual grounding, it cannot fully capture pedagogical quality, as it does not accoutn for the third use case, or perceived usefulness, which are particularly relevant in educational applications. Therefore, RAGAS was used as the core component of the automatic evaluation and complemented by additional evaluation methods within the overall study design.
+While the automated RAGAS evaluation provides a quantitative view of retrieval effectiveness, answer relevance, and factual grounding, it cannot fully capture pedagogical quality, as it does not account for the third use case, or perceived usefulness, which are particularly relevant in educational applications. Therefore, RAGAS was used as the core component of the automatic evaluation and complemented by additional evaluation methods within the overall study design.
 
 \paragraph{Expert blind assessment: Gaining insights into perceived quality and educational value}
 
@@ -38,7 +38,7 @@ The study was conducted as moderated one-on-one sessions with a duration of appr
 The evaluation combined quantitative and qualitative assessment to enable a comprehensive comparison of system performance. Quantitatively, responses were rated across multiple dimensions, including correctness, completeness, relevance, coherence, clarity, and didactic value. These criteria capture both technical answer quality and pedagogical effectiveness, which are particularly relevant in educational chatbot settings. Qualitatively, the think-aloud transcripts provide insights into expert decision-making processes, perceived strengths and weaknesses, and domain-specific expectations. This mixed-methods approach allows not only for a systematic comparison of both systems but also for a deeper understanding of how differences in system design affect perceived answer quality.
 
 
-\subparagraph{User blind assessment: Gaining quantitive insights}
+\subparagraph{User blind assessment: Gaining quantitative insights}
 
 In contrast to the expert interviews, which provide in-depth, qualitative insights from domain specialists, the Chatbot Arena captures aggregated preference signals from a broader user group under standardized conditions. This allows for a more behavior-oriented assessment of perceived response quality, complementing the expert-driven analysis with scalable, user-centered evidence. Together, both approaches enable a more comprehensive evaluation by combining structured judgment with real user perception.
 
