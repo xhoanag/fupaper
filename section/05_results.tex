@@ -1,4 +1,4 @@
-\section{Key Results}
+\section{Results}
 
 \subsection{RAGAS}
 
@@ -56,3 +56,60 @@ A significant deterioration can also be observed in terms of response times. The
 \caption{Key results of the cost analysis}
 \label{fig:cost_analysis}
 \end{figure}
+
+\subsection{Summary of Key Results}
+
+Table \ref{tab:summary_key_results} provides a comprehensive overview of the results across all evaluation dimensions.
+
+\begin{table}[!htbp]
+\centering
+\caption{Summary of Results across all Evaluation Dimensions}
+\label{tab:summary_key_results}
+\small
+\begin{tabularx}{\linewidth}{@{} >{\raggedright\arraybackslash}p{3.3cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X c >{\raggedright\arraybackslash}p{2.0cm} @{}}
+\toprule
+\textbf{Metric / Dimension} & \textbf{V1} & \textbf{V2} & \textbf{Significance} & \textbf{Verdict} \\
+\midrule
+\multicolumn{5}{@{}l}{\textbf{AUTOMATED EVALUATION --- RAGAS}} \\
+\midrule
+Answer relevancy & $\mu = 0.805$ & $\mu = 0.750$ & $p < 0.001$ & V1 better \\
+Context relevance & $\mu = 0.758$ & $\mu = 0.812$ & $p = 0.021$ & V2 better \\
+Faithfulness & $\mu = 0.880$ & $\mu = 0.855$ & $p = 0.153$ & No difference \\
+\midrule
+\multicolumn{5}{@{}l}{\textbf{EXPERT BLIND ASSESSMENT --- USE-CASE LEVEL (5-point Likert scale)}} \\
+\midrule
+Technical support & $\mu = 4.72$ & $\mu = 4.40$ & $p = 0.002$ & V1 better \\
+Course-related questions & $\mu = 3.96$ & $\mu = 4.10$ & $p = 0.036$ & V2 better \\
+Learning / Socratic mode & $\mu = 3.22$ & $\mu = 4.38$ & $p < 0.001$ & V2 better \\
+Overall (aggregate) & $\mu = 4.04$ & $\mu = 4.24$ & $p = 0.002$ & V2 better \\
+\midrule
+\multicolumn{5}{@{}l}{\textbf{EXPERT BLIND ASSESSMENT --- DIMENSION LEVEL (5-point Likert scale)}} \\
+\midrule
+Content correctness & $\mu = 4.44$ & $\mu = 4.51$ & $p = 0.256$ & No difference \\
+Contextual Integration / Coherence & $\mu = 2.92$ & $\mu = 4.23$ & $p = 0.007$ & V2 better \\
+Learning support / didactics & $\mu = 3.35$ & $\mu = 3.96$ & $p < 0.001$ & V2 better \\
+Relevance & $\mu = 4.13$ & $\mu = 4.27$ & $p = 0.158$ & V2 better \\
+Clarity / structure & $\mu = 4.23$ & $\mu = 4.36$ & $p = 0.182$ & No difference \\
+Completeness / efficiency & $\mu = 4.03$ & $\mu = 3.94$ & $p = 0.272$ & No difference \\
+\midrule
+\multicolumn{5}{@{}l}{\textbf{EXPERT BLIND ASSESSMENT --- THINK-ALOUD FEEDBACK (qualitative)}} \\
+\midrule
+Socratic / reflective quality & Not observed & Spontaneously labelled ``Socratic learning assistant''; praised for prompting reflection and metacognition & Qualitative & V2 better \\
+UX --- streaming \& citations & Absent & Streaming interpreted as active processing signal; human-readable citations explicitly noticed and valued & Qualitative & V2 better \\
+Abstraction level & Cleaner, high-level answers preferred for simple queries & Deeper course-specific grounding; seen as difference in abstraction, not quality per se & Qualitative & Context-dependent \\
+Language consistency & Was not addressed & English phrasing surfacing in German interactions caused perceived incoherence; flagged as sensitive quality criterion & Qualitative & V2 weakness \\
+Perceived latency & Judged faster & Consistently perceived as slower despite streaming & Qualitative & V1 better \\
+References / citations & Comparable & Comparable & Qualitative & No difference \\
+\midrule
+\multicolumn{5}{@{}l}{\textbf{USER BLIND ASSESSMENT --- CHATBOT ARENA ($N = 458$ judgments)}} \\
+\midrule
+Pairwise preference (decided only) & 197 / 378 (52.1\%) & 181 / 378 (47.9\%) & --- & No difference \\
+\midrule
+\multicolumn{5}{@{}l}{\textbf{COST ANALYSIS}} \\
+\midrule
+Average cost per prompt & 0.0133 € & 0.0475 € (Reranker = 0.0276 €) & --- & V1 cheaper \\
+Total response latency & 3.24 s & 6.21 s (Reranker = 1.93 s) & --- & V1 faster \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
