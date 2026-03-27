@@ -2,14 +2,16 @@
 
 \subsection{Data Basis}
 \label{data_basis}
-First, the identified gap regarding the lack of use case orientation in the evaluation datasets is addressed. In the educational context, it is crucial that the interactions being tested reflect real user needs, as the quality of a system is largely determined by its practical applicability. A data-driven approach for identifying and synthesizing use cases was developed. The use of real interaction data ensures that the derived use cases are not hypothetically constructed but are empirically grounded. This provides an essential foundation for the subsequent evaluation, as the performance of the systems is examined across practice-relevant scenarios, thereby achieving higher external validity.
+A data-driven approach was used to derive and synthesize use cases from authentic learning interactions. In educational settings, evaluations must reflect how learners and instructors actually use systems, as practical applicability determines their value. Grounding use cases in real study contexts enables assessment across relevant scenarios and strengthens external validity.
 
-The starting point was approximately $13,000$ real prompts from the logging platform of the productive chatbot, which capture actual user interactions. This raw dataset was first subjected to rule-based pre-filtering, during which irrelevant or technically flawed entries were removed and duplicates were cleaned up. This resulted in a cleaned dataset of $11,778$ prompts, which served as the basis for further analysis  (see \autoref{tab:data-processing} for an overview of the data processing pipeline).
+The starting point was $13,000$ real prompts from the logging platform of the productive chatbot, which capture actual user interactions. This raw dataset was first subjected to rule-based pre-filtering, during which irrelevant or technically flawed entries were removed and duplicates were cleaned up. This resulted in a cleaned dataset of $11,778$ prompts, which served as the basis for further analysis  (see \autoref{tab:data-processing} for an overview of the data processing pipeline).
 In the next step, the remaining prompts were mapped into a semantic vector space using a multilingual embedding model. This enables language-independent representation of the content and is particularly relevant in heterogeneous learning environments where different languages are used. Building on this, dimensionality reduction and density-based clustering were performed to identify structural patterns within the usage queries. This step resulted in the formation of 69 clusters as well as additional outliers that could not be clearly assigned.
 Since purely data-driven clusters do not necessarily represent directly interpretable usage scenarios, a manual aggregation was performed in the final step. In this process, clusters with related content were merged and abstracted into higher-level use cases. The result of this process is seven central use case categories that systematically map the actual interaction patterns of users.
-From these categories, three representative use cases were selected for the evaluation to ensure both coverage and comparability. These include (1) technical support queries, which reflect administrative and platform-related interactions, (2) course-related subject questions, representing knowledge-intensive Q\&A scenarios, and (3) learning-oriented interactions, which capture more complex, dialog-based support. Together, these use cases cover a spectrum from simple factual queries to pedagogically rich interactions and thus provide a balanced foundation for evaluating both system performance and educational value.
+From these categories, three representative use cases were selected for the evaluation to ensure both coverage and comparability. (1) Technical support represents the largest cluster group and forms the first use case. It encompasses organizational and structural platform questions, with typical examples being \enquote{How much does a course cost?}, \enquote{Where can I find certificates of attendance?}, or \enquote{Who are the contact persons?}. The second and third use cases, (2) course-related subject questions and (3) learning-oriented interactions, are derived from the second-largest cluster group. They address domain-specific inquiries during an active learning situation, often tied to a specific system context like a Moodle course. Example prompts include \enquote{How does an LLM work?}, \enquote{What is sklearn?}, or \enquote{What is the difference between Deep Learning and Machine Learning?}. Unlike technical support, these scenarios demand a deeper context integration; the system must correctly identify course-internal materials and synthesize them in a structurally coherent manner. 
 
-\begin{table}[htbp]
+Real user prompts from these largest clusters were extracted and utilized across all subsequent evaluation approaches, whereas prompts from the smaller cluster groups (e.g., polite phrases) were neglected for the evaluation.
+
+\begin{table}[H]
 % Eine Zeile mehr für die abgeleiteten Use Cases hinzufügen
 % Beispielprompts?
 \centering
@@ -74,9 +76,9 @@ Cluster consolidation
 
 \subsection{Multidimensional Comparative Evaluation Approach}
 
-\paragraph{RAGAS: Automatic Evaluation Along the RAG Dimensions}
+\paragraph{1) RAGAS: Automatic Evaluation Along the RAG Dimensions}
 
-To enable a scalable and systematic assessment of the developed RAG-based chatbot, the evaluation was conducted using the Retrieval-Augmented Generation Assessment System (RAGAS) \autocite{es2025ragas}. RAGAS was selected because it is a widely used framework for the automatic evaluation of RAG pipelines and allows quality to be assessed along the central dimensions of retrieval effectiveness, generation quality, and factual correctness. The framework is particularly suitable for applied settings in which large numbers of heterogeneous queries must be evaluated and manually created reference answers are not available. This approach is particularly relevant in educational environments, where large-scale manual annotation is difficult and controlled evaluations with reference answers are rarely feasible.
+For a scalable and systematic assessment, we employed the RAGAS \autocite{es2025ragas}. This framework automatically evaluates RAG pipelines along key dimensions: retrieval effectiveness, generation quality, and factual correctness. RAGAS is particularly suited for applied test settings, as it accommodates large volumes of heterogeneous queries without requiring manually created reference answers, which are often infeasible to obtain.
 
 RAGAS operationalizes evaluation along the RAG dimensions by providing automated metrics that quantify the effectiveness of individual RAG components \autocite{es2025ragas}. In this study, the metrics \textit{Answer Relevancy}, \textit{Context Relevance}, and \textit{Faithfulness} were used. \textit{Answer Relevancy} measures the semantic alignment between the user query and the generated response. \textit{Context Relevance} evaluates whether the retrieved context segments are suitable for answering the query and therefore reflects the effectiveness of the retrieval step. \textit{Faithfulness} assesses whether the generated answer is supported by the provided context and does not contain unsupported or hallucinated information. Together, these metrics provide a quantitative approximation of retrieval quality, generation quality, and factual correctness.
 
@@ -84,7 +86,7 @@ The evaluation was based on a curated set of 60 questions representing the use c
 
 While the automated RAGAS evaluation provides a quantitative view of retrieval effectiveness, answer relevance, and factual grounding, it cannot fully capture pedagogical quality, as it does not account for the third use case, or perceived usefulness, which are particularly relevant in educational applications. Therefore, RAGAS was used as the core component of the automatic evaluation and complemented by additional evaluation methods within the overall evaluation approach.
 
-\paragraph{Expert blind assessment: Gaining insights into perceived quality and educational value}
+\paragraph{2)Expert blind assessment: Gaining insights into perceived quality and educational value}
 
 To complement automated evaluation, an expert-based blind test was conducted to comparatively assess the two RAG systems. The evaluation followed an A/B design in which experts were presented with two system responses (A/B) per prompt in an identical interface, without knowledge of the underlying system configuration. This setup is inspired by arena-style evaluation approaches commonly used for generative models, which aim to reduce expectation and confirmation bias in human judgments \autocite{khan2025ragbenchmark}.
 
@@ -97,10 +99,31 @@ To complement automated evaluation, an expert-based blind test was conducted to 
 
 The study was conducted as moderated one-on-one sessions with a duration of approximately 30 to 60 minutes per participant. In total, 14 experts participated, including authors of e-learning content, educators, and domain experts from applied research and academic institutions. The evaluation followed a standardized procedure: First, participants were introduced to the evaluation setup and rating criteria. Next, the synthesized use cases were presented together with curated prompts derived from historical user queries. For each prompt, two system outputs were displayed in randomized order (\autoref{fig:expert_blindtest}). Participants evaluated both responses independently using a five-point Likert scale (1 = strongly disagree, 5 = strongly agree). In addition, participants were asked to verbalize their reasoning in a think-aloud setting, which was recorded and transcribed for qualitative analysis.
 
-The evaluation combined quantitative and qualitative assessment to enable a comprehensive comparison of system performance. Quantitatively, responses were rated across multiple dimensions, including correctness, completeness, relevance, coherence, clarity, and didactic value. These criteria capture both technical answer quality and pedagogical effectiveness, which are particularly relevant in educational chatbot settings. Qualitatively, the think-aloud transcripts provide insights into expert decision-making processes, perceived strengths and weaknesses, and domain-specific expectations. This mixed-methods approach allows not only for a systematic comparison of both systems but also for a deeper understanding of how differences in system design affect perceived answer quality.
+The evaluation combined quantitative and qualitative assessment to enable a comprehensive comparison of system performance. Quantitatively, responses were rated across multiple dimensions, including content correctness, completeness/efficiency, relevance, contextual integration/coherence, clarity/structure, and learning support/didactics (\autoref{tab:expert_evaluation_dimensions}). The evaluation statements for these dimensions were conceptually derived from established criteria by \autocite{neumann2025llm} and \autocite{hmoud2024rubric}. These criteria capture both technical answer quality and pedagogical effectiveness, which are particularly relevant in educational chatbot settings.
+
+\begin{table}[htbp]
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\linewidth}{l l X}
+\toprule
+\textbf{ID} & \textbf{Dimension} & \textbf{Evaluation Statement} \\
+\midrule
+I1 & Content correctness & The response is factually correct and contains no factual errors. \\
+I2 & Completeness / efficiency & The response fully covers the essential aspects of the question. \\
+I3 & Relevance & The response precisely addresses the question asked and contains no irrelevant information. \\
+I4 & Contextual Integration / Coherence & The response logically integrates relevant context information and is internally consistent. \\
+I5 & Clarity / structure & The response is clearly structured, easy to understand, and linguistically appropriate. \\
+I6 & Learning support / didactics & The response supports the understanding of the topic and fosters the learning process. \\
+\bottomrule
+\end{tabularx}
+\caption{Evaluation dimensions used in the expert blind test. The evaluation statements were translated from German into English.}
+\label{tab:expert_evaluation_dimensions}
+\end{table}
+
+Qualitatively, the think-aloud transcripts provide insights into expert decision-making processes, perceived strengths and weaknesses, and domain-specific expectations. This mixed-methods approach allows not only for a systematic comparison of both systems but also for a deeper understanding of how differences in system design affect perceived answer quality.
 
 
-\subparagraph{User blind assessment: Gaining quantitative insights}
+\subparagraph{3) User blind assessment: Gaining quantitative insights}
 
 In contrast to the expert interviews, which provide in-depth, qualitative insights from domain specialists, the Chatbot Arena captures aggregated preference signals from a broader user group under standardized conditions. This allows for a more behavior-oriented assessment of perceived response quality, complementing the expert-driven analysis with scalable, user-centered evidence. Together, both approaches enable a more comprehensive evaluation by combining structured judgment with real user perception.
 
@@ -113,7 +136,7 @@ The Chatbot Arena, depicted in \autoref{fig:user_blindtest}, was designed as a c
     \label{fig:user_blindtest}
 \end{figure}
 
-\paragraph{Cost Analysis: Overhead of Architectural Choices}
+\paragraph{4) Cost Analysis: Overhead of Architectural Choices}
 Cost efficiency has emerged as a critical dimension in both best-practice guidelines and recent evaluation literature on RAG systems, particularly in the context of real-world deployments. While much prior work focuses on accuracy and retrieval quality, productive systems must additionally satisfy constraints related to computational cost and responsiveness. This is especially relevant for educational platforms, where high interaction volumes and sustained user engagement amplify even small inefficiencies in token consumption or latency.
 
 Accordingly, this study incorporates a cost analysis that captures both economic and performance-related aspects of system behavior. Token usage is used as a direct proxy for monetary cost in API-based LLM deployments. To ensure transparency and reproducibility, all measurements are based on a consistent pricing scheme using the \textit{gpt-4o} model (Azure, region \textit{swedencentral}, version 2024-05-13), with costs of $€4.18621$ per million input tokens and $€13.8145$ per million output tokens (numbers obtained February 2026). This allows precise estimation of per-query costs and facilitates direct comparison between system variants. Complementarily, latency metrics—specifically Time-To-First-Token and total response time—capture system responsiveness and perceived interaction quality. By jointly analyzing token consumption and latency, the evaluation accounts for trade-offs introduced by architectural enhancements such as routing or reranking. This enables a holistic assessment that aligns technical performance with economic feasibility in practical deployment scenarios.
