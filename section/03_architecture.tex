@@ -32,10 +32,10 @@ V2 addresses these limitations through an adaptive architecture with a central r
     >=Latex
 ]
 
-\node[box] (c1) at (1.5,0)  {Contextualizer};
-\node[box] (r1) at (5.2,0)  {Semantic\\Retrieval};
-\node[box] (g1) at (8.9,0)  {Generator};
-\node[box] (p1) at (12.6,0) {Postprocessing};
+\node[box] (c1) at (1.8,0)  {Contextualizer};
+\node[box] (r1) at (5.93,0)  {Semantic\\Retrieval};
+\node[box] (g1) at (10.06,0)  {Generator};
+\node[box] (p1) at (14.2,0) {Postprocessing};
 
 \draw[line] (c1.east) -- (r1.west);
 \draw[line] (r1.east) -- (g1.west);
@@ -72,7 +72,7 @@ V2 addresses these limitations through an adaptive architecture with a central r
 \node[box] (gen2)      at (14.2,0) {Generator \&\\Postprocessing};
 
 % Lower workflow
-\node[box] (socraticmode) at (8.6,-1.8) {Socratic Learning\\Mode};
+\node[box] (socraticmode) at (14.2,-1.8) {Socratic Learning\\Mode};
 
 % Trunk
 \draw[thick] (router.east) -- (split);
