@@ -86,22 +86,24 @@ The evaluation was based on a curated set of 60 questions representing the use c
 
 While the automated RAGAS evaluation provides a quantitative view of retrieval effectiveness, answer relevance, and factual grounding, it cannot fully capture pedagogical quality, as it does not account for the third use case, or perceived usefulness, which are particularly relevant in educational applications. Therefore, RAGAS was used as the core component of the automatic evaluation and complemented by additional evaluation methods within the overall evaluation approach.
 
-\paragraph{2)Expert blind assessment: Gaining insights into perceived quality and educational value}
+\paragraph{2) Expert blind assessment: Gaining insights into perceived quality and educational value}
 
 To complement automated evaluation, an expert-based blind test was conducted to comparatively assess the two RAG systems. The evaluation followed an A/B design in which experts were presented with two system responses (A/B) per prompt in an identical interface, without knowledge of the underlying system configuration. This setup is inspired by arena-style evaluation approaches commonly used for generative models, which aim to reduce expectation and confirmation bias in human judgments \autocite{khan2025ragbenchmark}.
 
-\begin{figure}[htbp]
+\begin{wrapfigure}{l}{0.55\textwidth}
     \centering
+    \vspace{-0.6em}
     \includegraphics[width=\linewidth]{figures/expert_blindtest_interface.png}
     \caption{Arena-style interface used in the expert blind test. Two system responses (A/B) are displayed side-by-side in an identical interface to enable unbiased comparison.}
     \label{fig:expert_blindtest}
-\end{figure}
+    \vspace{-0.8em}
+\end{wrapfigure}
 
 The study was conducted as moderated one-on-one sessions with a duration of approximately 30 to 60 minutes per participant. In total, 14 experts participated, including authors of e-learning content, educators, and domain experts from applied research and academic institutions. The evaluation followed a standardized procedure: First, participants were introduced to the evaluation setup and rating criteria. Next, the synthesized use cases were presented together with curated prompts derived from historical user queries. For each prompt, two system outputs were displayed in randomized order (\autoref{fig:expert_blindtest}). Participants evaluated both responses independently using a five-point Likert scale (1 = strongly disagree, 5 = strongly agree). In addition, participants were asked to verbalize their reasoning in a think-aloud setting, which was recorded and transcribed for qualitative analysis.
 
 The evaluation combined quantitative and qualitative assessment to enable a comprehensive comparison of system performance. Quantitatively, responses were rated across multiple dimensions, including content correctness, completeness/efficiency, relevance, contextual integration/coherence, clarity/structure, and learning support/didactics (\autoref{tab:expert_evaluation_dimensions}). The evaluation statements for these dimensions were conceptually derived from established criteria by \autocite{neumann2025llm} and \autocite{hmoud2024rubric}. These criteria capture both technical answer quality and pedagogical effectiveness, which are particularly relevant in educational chatbot settings.
 
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
 \renewcommand{\arraystretch}{1.2}
 \begin{tabularx}{\linewidth}{l l X}
@@ -127,14 +129,16 @@ Qualitatively, the think-aloud transcripts provide insights into expert decision
 
 In contrast to the expert interviews, which provide in-depth, qualitative insights from domain specialists, the Chatbot Arena captures aggregated preference signals from a broader user group under standardized conditions. This allows for a more behavior-oriented assessment of perceived response quality, complementing the expert-driven analysis with scalable, user-centered evidence. Together, both approaches enable a more comprehensive evaluation by combining structured judgment with real user perception.
 
-The Chatbot Arena, depicted in \autoref{fig:user_blindtest}, was designed as a controlled evaluation platform for pairwise model comparisons and is methodologically based on the principles of the  Large Model Systems Organization (LMSYS) Chatbot Arena \autocite{Zheng2023LMSYSArena}. The goal is not free interaction, but rather the standardized evaluation of response quality under controlled conditions. To this end, a blind A/B setup is used. Participants see two responses to the same question and choose between \textit{A}, \textit{B}, \textit{tie}, or \textit{both bad}. Pairwise preference comparisons are considered a robust evaluation method, as relative judgments are cognitively more consistent than absolute ratings \autocite{Thurstone1927ComparativeJudgment, BradleyTerry1952PairedComparisons} and generate an aggregatable preference signal. For experimental control purposes, the 60 questions in the RAGAS evaluation were divided into four subsets. Responses are dynamically generated for each session to ensure realistic conditions. Assignment is balanced using a round-robin procedure, ensuring even load distribution and sample representation \autocite{Dillman2014TailoredDesign,Tourangeau2000SurveyResponse}. At the same time, this division reduces fatigue; approximately 15 questions are evaluated per participant. Additionally, the order of the answers is randomized to minimize presentation bias and ensure internal validity \autocite{Kohavi2020TrustworthyExperiments,Joachims2017UnbiasedLTR}.
-
-\begin{figure}[htbp]
+\begin{wrapfigure}{l}{0.67\textwidth}
     \centering
+    \vspace{-0.6em}
     \includegraphics[width=\linewidth]{figures/user_blindtest_interface.png}
     \caption{Arena-style interface used in the user blind test. Two system responses (A/B) are displayed side-by-side in an identical interface to enable unbiased comparison.}
     \label{fig:user_blindtest}
-\end{figure}
+    \vspace{-0.8em}
+\end{wrapfigure}
+
+The Chatbot Arena, depicted in \autoref{fig:user_blindtest}, was designed as a controlled evaluation platform for pairwise model comparisons and is methodologically based on the principles of the  Large Model Systems Organization (LMSYS) Chatbot Arena \autocite{Zheng2023LMSYSArena}. The goal is not free interaction, but rather the standardized evaluation of response quality under controlled conditions. To this end, a blind A/B setup is used. Participants see two responses to the same question and choose between \textit{A}, \textit{B}, \textit{tie}, or \textit{both bad}. Pairwise preference comparisons are considered a robust evaluation method, as relative judgments are cognitively more consistent than absolute ratings \autocite{Thurstone1927ComparativeJudgment, BradleyTerry1952PairedComparisons} and generate an aggregatable preference signal. For experimental control purposes, the 60 questions in the RAGAS evaluation were divided into four subsets. Responses are dynamically generated for each session to ensure realistic conditions. Assignment is balanced using a round-robin procedure, ensuring even load distribution and sample representation \autocite{Dillman2014TailoredDesign,Tourangeau2000SurveyResponse}. At the same time, this division reduces fatigue; approximately 15 questions are evaluated per participant. Additionally, the order of the answers is randomized to minimize presentation bias and ensure internal validity \autocite{Kohavi2020TrustworthyExperiments,Joachims2017UnbiasedLTR}.
 
 \paragraph{4) Cost Analysis: Overhead of Architectural Choices}
 Cost efficiency has emerged as a critical dimension in both best-practice guidelines and recent evaluation literature on RAG systems, particularly in the context of real-world deployments. While much prior work focuses on accuracy and retrieval quality, productive systems must additionally satisfy constraints related to computational cost and responsiveness. This is especially relevant for educational platforms, where high interaction volumes and sustained user engagement amplify even small inefficiencies in token consumption or latency.
