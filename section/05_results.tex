@@ -4,7 +4,7 @@
 
 The top half of \autoref{fig:ragas1} shows the descriptive results of the RAGAS evaluation by displaying the aggregated mean values, standard deviations, and $95\%$ confidence intervals of the evaluated metrics (\textit{Answer Relevancy}, \textit{Context Relevance}, and \textit{Faithfulness}) for both system versions. Points indicate the mean values ($\mu$), the lighter vertical bars represent the standard deviation ($\sigma$), and the darker bars indicate the $95\%$ confidence interval (CI). For \textit{Answer Relevancy}, V1 achieves a higher mean value ($\mu = 0.805$, $\sigma = 0.138$) than V2 ($\mu = 0.750$, $\sigma = 0.119$), with clearly separated confidence intervals. For \textit{Context Relevance}, the pattern is reversed: V2 reaches a higher mean value ($\mu = 0.812$, $\sigma = 0.336$) than V1 ($\mu = 0.758$, $\sigma = 0.373$), while the variance is higher for both versions compared to \textit{Answer Relevancy}. For \textit{Faithfulness}, the mean values are close to each other (V1: $\mu = 0.880$, $\sigma = 0.203$; V2: $\mu = 0.855$, $\sigma = 0.228$), and the confidence intervals overlap. \\
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{figures/ragas1.jpg}
 \caption{Descriptive overview of RAGAS metrics including mean values, standard deviations, and \textbf{95\%} confidence intervals}
@@ -15,7 +15,7 @@ The bottom half of \autoref{fig:ragas1} presents the results of statistical test
 
 \subsection{Expert blind assessment}
 
-The expert blind test provides a differentiated assessment of the two system versions. The questionnaire-based ratings, depicted in \autoref{fig:results_experts}, reveal statistically significant differences across specific use cases and evaluation dimensions, while the accompanying think-aloud data offer additional insight into how experts perceived the qualitative differences between both systems. One expert interview was excluded from the analysis because essential course vectors were isolated as technical outliers in the vector database and were therefore not retrievable, which would have distorted comparability with the remaining cases.
+The expert blind test provides a differentiated assessment of the two system versions. The questionnaire-based ratings, depicted in \autoref{tab:summary_key_results}, reveal statistically significant differences across specific use cases and evaluation dimensions, while the accompanying think-aloud data offer additional insight into how experts perceived the qualitative differences between both systems. One expert interview was excluded from the analysis because essential course vectors were isolated as technical outliers in the vector database and were therefore not retrievable, which would have distorted comparability with the remaining cases.
 
 With regard to the use-case-level evaluation, the results show a mixed but overall favorable pattern for V2. In the technical support use case, V2 performed significantly worse than V1 ($p = 0.002$), indicating that the earlier system version was judged more positively for administrative and fact-oriented requests. In contrast, V2 achieved a slight but significant improvement in course-related subject questions ($p = 0.036$). The strongest advantage for V2 emerged in the learning assistance use case, where it was rated significantly better than V1 ($p < 0.001$). This suggests that the revised architecture was particularly beneficial for prompts requiring didactic guidance and learning-oriented interaction rather than simple factual retrieval.
 
@@ -23,7 +23,7 @@ A more fine-grained analysis by evaluation dimension further clarifies these dif
 
 The qualitative think-aloud analysis helps explain these quantitative findings. Experts consistently described V2 as more supportive of learning and in some cases explicitly referred to it as a \enquote{Socratic learning assistant}. In particular, V2 was perceived as better at prompting reflection and incorporating metacognitive elements, which is highly relevant for educational chatbot design. Experts also evaluated V2 more positively with regard to UX and transparency, especially due to improved link presentation and visible streaming behavior. The streaming output was interpreted as a useful signal that the system was still processing the request, which improved the perceived interaction quality.
 
-At the same time, the think-aloud comments also revealed important limitations of V2. In terms of answer quality, experts characterized V1 as more likely to provide concise \enquote{high-level} answers, whereas V2 was perceived as integrating course-specific context more deeply. This difference was described primarily as one of abstraction level and contextual depth rather than simple quality superiority. Moreover, V2 received some critical comments regarding language consistency, especially when English prompt structures appeared in otherwise German interactions, which led to perceived inconsistency and uncertainty. This indicates that linguistic coherence is a sensitive quality criterion in educational settings that may not be fully captured by structured rating scales alone. Regarding references, experts considered both systems largely comparable, with no clear advantage for either version. Finally, latency was consistently perceived in favor of V1, which was judged to respond faster.
+At the same time, the think-aloud comments also revealed important limitations of V2. In terms of answer quality, experts characterized V1 as more likely to provide concise \enquote{high-level} answers, whereas V2 was perceived as integrating course-specific context more deeply. This difference was described primarily as one of abstraction level and contextual depth rather than simple quality superiority. Moreover, V2 received some critical comments regarding language consistency, especially when English prompt structures appeared in otherwise German interactions, which led to perceived inconsistency and uncertainty. Regarding references, experts considered both systems largely comparable, with no clear advantage for either version. Finally, latency was consistently perceived in favor of V1, which was judged to respond faster.
 
 Taken together, the expert blind test shows that V2 did not improve all aspects of performance equally, but it did yield meaningful gains in those dimensions most closely related to the paper’s educational objective: relevance, didactic quality, and learning-oriented interaction. 
 
@@ -37,7 +37,7 @@ To determine whether this observed preference for the baseline model was statist
 The resulting $p$-value of $0.440$ ($p \geq 0.05$) indicates that the difference in user preference is not statistically significant.
 Therefore, while V1 maintained a slight nominal edge in direct, blind comparison, the aggregated preference signal suggests that users perceive the response quality of the two RAG models to be statistically indistinguishable in practical application.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{figures/arena_evaluation.png}
 \caption{Voting results of the user blind assessment in an Arena setting}
@@ -50,7 +50,7 @@ The results shown in \autoref{fig:cost_analysis} illustrate the key effects of t
 
 A significant deterioration can also be observed in terms of response times. The average total latency increases from $3.24$ seconds in V1 to $6.21$ seconds in V2. At the same time, the time-to-first-token (TTFT) increases to $5.77$ seconds. However, the figure also shows that a significant portion of this additional latency is attributable to the newly introduced reranking. Streaming does little to alleviate the increased latency, since response generation takes less than a second on average, but it does reduce the TTFT.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{figures/cost_analysis_result.png}
 \caption{Key results of the cost analysis}
@@ -61,7 +61,7 @@ A significant deterioration can also be observed in terms of response times. The
 
 Table \ref{tab:summary_key_results} provides a comprehensive overview of the results across all evaluation dimensions.
 
-\begin{table}[!htbp]
+\begin{table}[H]
 \centering
 \caption{Summary of Results across all Evaluation Dimensions}
 \label{tab:summary_key_results}
